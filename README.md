@@ -5,13 +5,13 @@ Sample repo to demonstrate that helm hook delete mechanics are fixed as in https
 [Argo CD](https://github.com/argoproj/argo-cd) supports helm hooks where a helm hook is translated into an Argo CD resource hook and sync waves. A slightly different handling of hook weight and hook delete policies in earlier Argo CD versions could lead to resources being deleted too early / earlier than with native helm cli. This issue is described in detail in https://github.com/argoproj/argo-cd/issues/4384 and should luckily be fixed with https://github.com/argoproj/gitops-engine/pull/144.
 
 ## Sample chart
-This sample repo reproduces the scenario that lead to the problem in earlier Argo CD versions with a minimum of k8s resources. The helm chart in the chart directory consists of 3 resources:
+This sample repo reproduces the scenario that lead to the problem in earlier Argo CD versions with a minimum of k8s resources. The helm chart in [the chart directory](chart/) consists of 3 resources:
 
-- **configmap helm-hook-pre-cm** as hook in helm phases "pre-install,pre-upgrade" = Argo CD phase "presync", weight "-6" and delete policy "before-hook-creation, hook-succeeded"
-- **job helm-hook-pre-job** as hook in helm phases "pre-install,pre-upgrade" = Argo CD phase "presync", weight "-5" and delete policy "before-hook-creation"
+- **[configmap helm-hook-pre-cm](chart/templates/configmap-presync.yaml)** as hook in helm phases "pre-install,pre-upgrade" = Argo CD phase "presync", weight "-6" and delete policy "before-hook-creation, hook-succeeded"
+- **[job helm-hook-pre-job](chart/templates/job-presync.yaml)** as hook in helm phases "pre-install,pre-upgrade" = Argo CD phase "presync", weight "-5" and delete policy "before-hook-creation"
     - depends on configmap helm-hook-pre-cm (uses a value as env var)
     - starts a single pod that prints the configmap value, sleeps 180 seconds and then finishes with printing "done"
-- **configmap my-synced-cm** as regular, "permanent" resource in the regular sync phase - this configmap is meant to stay :blush:
+- **[configmap my-synced-cm](chart/templates/configmap-sync.yaml)** as regular, "permanent" resource in the regular sync phase - this configmap is meant to stay :blush:
 
 ## Expected behavior with the PR / fix (everything's good)
 We expect the following chain of events:
