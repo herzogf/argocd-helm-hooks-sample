@@ -2,7 +2,7 @@
 Sample repo to demonstrate that helm hook delete mechanics are fixed as in https://github.com/argoproj/argo-cd/issues/4384 .
 
 ## Background
-In earlier versions [Argo CD](https://github.com/argoproj/argo-cd) supported helm hooks where a helm hook was translated into a argo hook and sync waves. A slightly different handling of hook weight and hook delete policies could lead to resources being deleted too early / earlier than in native helm cli. This issue is described in detail in https://github.com/argoproj/argo-cd/issues/4384 and should luckily be fixed with https://github.com/argoproj/gitops-engine/pull/144.
+[Argo CD](https://github.com/argoproj/argo-cd) supports helm hooks where a helm hook is translated into an Argo CD resource hook and sync waves. A slightly different handling of hook weight and hook delete policies in earlier Argo CD versions could lead to resources being deleted too early / earlier than with native helm cli. This issue is described in detail in https://github.com/argoproj/argo-cd/issues/4384 and should luckily be fixed with https://github.com/argoproj/gitops-engine/pull/144.
 
 ## Sample chart
 This sample repo reproduces the scenario that lead to the problem in earlier Argo CD versions with a minimum of k8s resources. The helm chart in the chart directory consists of 3 resources:
