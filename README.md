@@ -47,6 +47,24 @@ With older versions of Argo CD without the fix from the issue/PR above the follo
 
 I have not verified this exact sample with an older Argo version but we ran into exactly this problem with another helm chart in ArgoCD v1.5.
 
+## Try it
+Try this sample on your own Argo CD instance simply by pointing your Argo CD application to repoURL "https://github.com/herzogf/argocd-helm-hooks-sample.git", targetRevision "HEAD" (or main) and path "chart". When you're using helm umbrella charts you can use the helm repo on github pages - your Chart.yaml could then look something like this:
+
+```yaml
+apiVersion: v2
+name: helm-hook-test-wrapper
+description: test chart for helm hooks in argocd
+type: application
+
+version: "0.1.0"
+appVersion: "0.1.0"
+
+dependencies:
+- name: helm-hook-test
+  version: "0.1.0"
+  repository: https://herzogf.github.io/argocd-helm-hooks-sample
+```
+
 ## Further information
 See the following links for more technical information about helm hooks, resource hooks and sync waves in Argo CD:
 
