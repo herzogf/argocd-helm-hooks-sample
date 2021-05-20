@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  helm-hook-test:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2021-05-20T23:42:23.535776489+02:00"
+    description: test chart for helm hooks in argocd
+    digest: cd5fa51370f56bb97991170b7c73463abbb41adedbe9c907d7813e87ff9bc3c0
+    name: helm-hook-test
+    type: application
+    urls:
+    - https://herzogf.github.io/argocd-helm-hooks-sample/helm-hook-test-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-05-20T23:42:23.521553333+02:00"
